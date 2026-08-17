@@ -1,14 +1,9 @@
-import React, { useContext } from "react";
-import {
-  AppBar,
-  Avatar,
-  Box,
-  styled,
-  Tooltip,
-} from "@mui/material";
+import React, { useContext, useState } from "react";
+import { AppBar, Avatar, Box, styled, Tooltip } from "@mui/material";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo_text.png";
 import { OnlyContext } from "../../context/Context";
+import Menu from "./Menu";
 
 const Component = styled(AppBar)`
   background: rgba(255, 255, 255, 0.92);
@@ -60,7 +55,7 @@ const Container = styled(Box)`
     color: #1976d2;
     background: rgba(25, 118, 210, 0.08);
   }
-    &> a:focus {
+  & > a:focus {
     color: #26a738;
     background: rgb(62 210 25 / 8%);
   }
@@ -80,7 +75,7 @@ const ProfileAvatar = styled(Avatar)`
   height: 40px;
   font-size: 15px;
   font-weight: 700;
-  background-color:#1976d2;
+  background-color: #1976d2;
   cursor: pointer;
   // border: 2px solid white;
   // box-shadow: 0 3px 10px rgba(25, 118, 210, 0.3);
@@ -90,7 +85,6 @@ const ProfileAvatar = styled(Avatar)`
     transform: scale(1.08);
     box-shadow: 0 5px 15px rgba(25, 118, 210, 0.4);
   }
-    
 `;
 
 const handleLogout = () => {
@@ -102,12 +96,19 @@ const handleLogout = () => {
 
 const Header = () => {
   const { accountDetails } = useContext(OnlyContext);
+  const [menu, setMenu] = useState(false);
+
+  const handleMenu = () => {
+    setMenu((prev) => !prev);
+  };
 
   return (
     <Component>
       {/* Logo */}
       <ImageContainer>
-        <Link to="/"><img src={logo} alt="Logo" /></Link>
+        <Link to="/">
+          <img src={logo} alt="Logo" />
+        </Link>
       </ImageContainer>
 
       {/* Navigation */}
@@ -116,20 +117,21 @@ const Header = () => {
         <Link to="/about">ABOUT</Link>
         <Link to="/contact">CONTACT</Link>
         <Link to="/login" onClick={handleLogout}>
-
           LOGOUT
         </Link>
       </Container>
 
       {/* Profile */}
       <ProfileContainer>
-        <Tooltip title={accountDetails?.username || "Profile"} arrow>
-          <ProfileAvatar>
-            {accountDetails?.username
-              ?.charAt(0)
-              .toUpperCase()}
-          </ProfileAvatar>
-        </Tooltip>
+        <Box sx={{ position: "relative" }}>
+          <Tooltip title={accountDetails?.username || "Profile"} arrow>
+            <ProfileAvatar onClick={handleMenu}>
+              {accountDetails?.username?.charAt(0).toUpperCase()}
+            </ProfileAvatar>
+          </Tooltip>
+
+          <Menu menu={menu} setMenu={setMenu}/>
+        </Box>
       </ProfileContainer>
     </Component>
   );

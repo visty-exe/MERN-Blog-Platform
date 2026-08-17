@@ -99,8 +99,9 @@ const Login = () => {
 
         sessionStorage.setItem("username", data.username);
         sessionStorage.setItem("name", data.name);
+        sessionStorage.setItem("id", data.id);
 
-        setAccountDetails({ username: data.username, name: data.name });
+        setAccountDetails({ username: data.username, name: data.name,id: data.id });
         setAlert("success");
         navigate('/')
       } else {

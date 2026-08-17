@@ -16,6 +16,8 @@ import DetailView from "./details/DetailView";
 import Update from "./components/create/Update";
 import About from "./components/about/About"
 import Contact from "./components/contact/Contact";
+import Profile from "./components/profile/Profile";
+
 
 const PrivateRoute = () => {
   const token = sessionStorage.getItem("accessToken");
@@ -49,6 +51,7 @@ const App = () => {
               <Route path="/contact" element={<Contact />} /> 
               <Route path="/details/:id" element={<DetailView />} />
               <Route path="/update/:id" element={<Update />} />
+              <Route path="/profile/:id" element={<Profile />} />
             </Route>
           </Routes>
         </BrowserRouter>

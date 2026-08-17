@@ -64,7 +64,8 @@ export const loginUser = async (req, res) => {
                 accessToken: accessToken,
                 refreshToken: refreshToken,
                 name: user.name,
-                username: user.username
+                username: user.username,
+                id: user._id
             })
         } else {
             return res.status(400).json({
