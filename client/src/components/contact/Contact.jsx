@@ -82,7 +82,7 @@ const Contact = () => {
 
         <Stack direction="row" spacing={3} mt={4}>
           <IconLink
-            href="https://github.com/your-username"
+            href="https://github.com/visty-exe"
             target="_blank"
             rel="noopener noreferrer"
           >
