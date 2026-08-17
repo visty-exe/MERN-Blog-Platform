@@ -25,10 +25,10 @@ export const getAllPosts = async (req, res) => {
     let posts;
     try {
         if (category) {
-            posts = await Post.find({ categories: category })
+            posts = await Post.find({ categories: category }).sort({createdAt: -1})
         } else {
 
-            posts = await Post.find({})
+            posts = await Post.find({}).sort({createdAt:-1})
         }
         return res.status(200).json(posts)
     } catch (error) {

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { mongo } from "mongoose";
 
 export const uploadImage = async (req, res) => {
     try {
@@ -24,7 +24,7 @@ export const uploadImage = async (req, res) => {
         uploadStream.end(req.file.buffer);
 
         uploadStream.on("finish", () => {
-            const imageUrl = `${process.env.BACKEND_URL}/file/${filename}`;
+            const imageUrl = `${process.env.BACKEND_URL}/api/file/${filename}`;
 
             return res.status(200).json({
                 success: true,
@@ -45,6 +45,48 @@ export const uploadImage = async (req, res) => {
         console.log("Upload error:", error);
 
         return res.status(500).json({
+            success: false,
+            msg: error.message,
+        });
+    }
+};
+
+export const getImage= async(req,res)=>{
+    try {
+        const db= mongoose.connection.db
+
+        const bucket= new mongoose.mongo.GridFSBucket(db,{
+            bucketName: "photos"
+        })
+
+        const files = await db
+            .collection("photos.files")
+            .find({ filename: req.params.filename })
+            .toArray();
+
+        if (!files.length) {
+            return res.status(404).json({
+                success: false,
+                msg: "Image not found",
+            });
+        }
+
+         const file = files[0];
+
+        res.set("Content-Type", file.contentType);
+
+        const downloadStream = bucket.openDownloadStream(file._id);
+
+        downloadStream.on("error", (error) => {
+            console.log("Image download error:", error);
+            res.status(500).end();
+        });
+
+        downloadStream.pipe(res);
+    } catch (error) {
+        console.log("Get image error:", error);
+
+        res.status(500).json({
             success: false,
             msg: error.message,
         });

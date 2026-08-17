@@ -6,13 +6,15 @@ import {
   InputBase,
   Button,
   TextareaAutosize,
+  Tooltip,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { ImageUp } from "lucide-react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useContext } from "react";
 import { OnlyContext } from "../../context/Context";
 import { getAccessToken } from "../../utils/common-utils";
+import { ArrowBackIos } from "@mui/icons-material";
 
 const Image = styled("img")`
   height: 50vh;
@@ -249,6 +251,15 @@ const Update = () => {
 
   return (
     <>
+    <Link to={`/details/${post._id}`}>
+          <Tooltip title="Back to Post">
+            <ArrowBackIos
+              fontSize="small"
+              className="m-4 ml-10 cursor-pointer transition-transform duration-1000 ease-in-out hover:-translate-x-2"
+            />
+          </Tooltip>
+          
+        </Link>
       <Container>
         <Image
           src={

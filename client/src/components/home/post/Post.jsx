@@ -16,10 +16,11 @@ const Container = styled(Box)`
   flex-direction: column;
   transition: all 0.25s ease;
   cursor: pointer;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
 
   &:hover {
     transform: translateY(-6px);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 12px 45px rgba(0, 0, 0, 0.1);
     border-color: #dde1e7;
   }
 `;

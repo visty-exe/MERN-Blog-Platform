@@ -1,4 +1,3 @@
-
 import {
   Box,
   styled,
@@ -6,13 +5,15 @@ import {
   InputBase,
   Button,
   TextareaAutosize,
+  Tooltip,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { ImageUp } from "lucide-react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import { useContext } from "react";
 import { OnlyContext } from "../../context/Context";
 import { getAccessToken } from "../../utils/common-utils";
+import { ArrowBackIos } from "@mui/icons-material";
 
 const Image = styled("img")`
   height: 50vh;
@@ -223,53 +224,59 @@ const CreatePost = () => {
 
   return (
     <>
+    <Link to={"/"}>
+          <Tooltip title="Back to Home">
+            <ArrowBackIos
+              fontSize="small"
+              className="m-4 ml-10 cursor-pointer transition-transform duration-300 hover:-translate-x-2"
+            />
+          </Tooltip>
+          
+        </Link>
       <Container>
+        
         <Image
           src={
             post.picture
               ? post.picture
-              : "https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"
-          }
-          alt="banner"
-          title="Banner Image"
-        />
-
-        <StyledFormControl>
-          <UploadLabel htmlFor="upload_image">
-            <ImageUp color="#363636" size={25} />
-          </UploadLabel>
-
-          <input
-            type="file"
-            id="upload_image"
-            onChange={handleFilechange}
-            style={{ display: "none" }}
-          />
-
-          <StyledInputBase
-            placeholder="Title"
-            name="title"
-            onChange={handleChange}
-          />
-
-          <PublishButton
-            variant="contained"
-            onClick={savePost}
-          >
-            Publish
-          </PublishButton>
-        </StyledFormControl>
-
-        <StyledTextareaAutosize
-          onChange={handleChange}
-          name="description"
-          placeholder="Whats Up!..."
-          minRows={5}
-        />
-      </Container>
-    </>
-  );
-};
-
+              : "https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80" 
+          } 
+          alt="banner" 
+          title="Banner Image" 
+        /> 
+ 
+        <StyledFormControl> 
+          <UploadLabel htmlFor="upload_image"> 
+            <ImageUp color="#363636" size={25} /> 
+          </UploadLabel> 
+ 
+          <input 
+            type="file" 
+            id="upload_image" 
+            onChange={handleFilechange} 
+            style={{ display: "none" }} 
+          /> 
+ 
+          <StyledInputBase 
+            placeholder="Title" 
+            name="title" 
+            onChange={handleChange} 
+          /> 
+ 
+          <PublishButton variant="contained" onClick={savePost}> 
+            Publish 
+          </PublishButton> 
+        </StyledFormControl> 
+ 
+        <StyledTextareaAutosize 
+          onChange={handleChange} 
+          name="description" 
+          placeholder="Whats Up!..." 
+          minRows={5} 
+        /> 
+      </Container> 
+    </> 
+  ); 
+}; 
+ 
 export default CreatePost;
-

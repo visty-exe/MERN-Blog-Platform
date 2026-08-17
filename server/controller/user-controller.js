@@ -8,6 +8,14 @@ export const signupUser = async (req, res) => {
     try {
         const { name, password, username } = req.body;
         const hashPass = await bcrypt.hash(password, 10)
+        const find = await User.findOne({ username })
+        if (find) {
+            return res.status(409).json({
+                success: false,
+                message: "Username already exists"
+
+            })
+        }
         const newUser = await User.create({
             name,
             username,
@@ -44,13 +52,13 @@ export const loginUser = async (req, res) => {
     try {
         let match = await bcrypt.compare(password, user.password)
         if (match) {
-            const accessToken= jwt.sign(user.toJSON(),process.env.ACCESS_TOKEN_KEY,{expiresIn:'15m'})
-            const refreshToken= jwt.sign(user.toJSON(),process.env.REFRESH_TOKEN_KEY)
+            const accessToken = jwt.sign(user.toJSON(), process.env.ACCESS_TOKEN_KEY, { expiresIn: '7D' })
+            const refreshToken = jwt.sign(user.toJSON(), process.env.REFRESH_TOKEN_KEY)
 
-            const newToken= new Token({token: refreshToken})
+            const newToken = new Token({ token: refreshToken })
             await newToken.save();
 
-             return res.status(200).json({
+            return res.status(200).json({
                 success: "true",
                 message: "Login Successfull",
                 accessToken: accessToken,

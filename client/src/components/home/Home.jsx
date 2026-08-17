@@ -7,7 +7,8 @@ import Post from "./post/Posts";
 const Home = () => {
   return (
     <>
-      <Banner />
+      <div className="bg-gray-200">
+        <Banner />
       <Grid container>
         <Grid size={{ xs: 12, sm: 2, lg: 2 }}>
           <Categories />
@@ -15,6 +16,7 @@ const Home = () => {
 
         <Grid size={{ xs: 12, sm: 10, lg: 10 }}><Post/></Grid>
       </Grid>
+      </div>
     </>
   );
 };

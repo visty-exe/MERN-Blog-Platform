@@ -19,11 +19,12 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Type } from "lucide-react";
 import Comments from "./comments/comments";
+import { ArrowBackIos } from "@mui/icons-material";
 
 const Page = styled(Box)`
   background: #f8f9fa;
   min-height: 100vh;
-  padding: 50px 20px;
+  padding: 10px 20px;
 `;
 
 const Container = styled(Box)`
@@ -177,7 +178,7 @@ const DetailView = () => {
 
   const fallbackImage =
     "https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixlib=rb-1.2.1&w=1000&q=80";
-    const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = getAccessToken();
@@ -208,91 +209,102 @@ const DetailView = () => {
   const token = getAccessToken();
   const deleteBlog = async () => {
     try {
-        const token = getAccessToken();
+      const token = getAccessToken();
 
-        const response = await fetch(`${BASE_URL}/delete/${id}`, {
-            method: "DELETE",
-            headers: {
-                Authorization: `${token}`,
-                "Content-Type": "application/json"
-            }
-        });
+      const response = await fetch(`${BASE_URL}/delete/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `${token}`,
+          "Content-Type": "application/json",
+        },
+      });
 
-        const data = await response.json();
+      const data = await response.json();
 
-        if (response.ok) {
-            navigate("/");
-        } else {
-            console.error("Delete failed:", data);
-        }
-
+      if (response.ok) {
+        navigate("/");
+      } else {
+        console.error("Delete failed:", data);
+      }
     } catch (error) {
-        console.error("Error deleting post:", error);
+      console.error("Error deleting post:", error);
     }
-};
+  };
   return (
-    <Page>
-      <Container>
-        <Article>
-          {/* Hero Image */}
+    <>
+      <Link to={"/"}>
+        <Tooltip title="Back to Home">
+          <ArrowBackIos
+            fontSize="small"
+            className="m-4 ml-10 cursor-pointer transition-transform duration-300 hover:-translate-x-2"
+          />
+        </Tooltip>
+      </Link>
+      <Page>
+        <Container>
+          <Article>
+            {/* Hero Image */}
 
-          <HeroImage src={post.picture || fallbackImage} alt={post.title} />
+            <HeroImage src={post.picture || fallbackImage} alt={post.title} />
 
-          <Content>
-            {/* Category */}
+            <Content>
+              {/* Category */}
 
-            {post.category && <Category>{post.category}</Category>}
+              {post.category && <Category>{post.category}</Category>}
 
-            {/* Title */}
+              {/* Title */}
 
-            <Title>{post.title}</Title>
+              <Title>{post.title}</Title>
 
-            {/* Author + Date */}
+              {/* Author + Date */}
 
-            <Meta>
-              <AvatarBox>{post.username?.charAt(0)?.toUpperCase()}</AvatarBox>
+              <Meta>
+                <AvatarBox>{post.username?.charAt(0)?.toUpperCase()}</AvatarBox>
 
-              <AuthorInfo>
-                <Author>{post.username}</Author>
+                <AuthorInfo>
+                  <Author>{post.username}</Author>
 
-                {post.createdAt && (
-                  <DateText>{new Date(post.createdAt).toDateString()}</DateText>
-                )}
-              </AuthorInfo>
+                  {post.createdAt && (
+                    <DateText>
+                      {new Date(post.createdAt).toDateString()}
+                    </DateText>
+                  )}
+                </AuthorInfo>
 
-              {/* EDIT + DELETE */}
+                {/* EDIT + DELETE */}
 
-              <Actions>
-                {accountDetails.username === post.username && (
-                  <>
-                    <Tooltip title="Edit Post">
-                      <Link to={`/update/${post._id}`}>
-                        <EditButton>
-                          <EditIcon fontSize="small" />
-                        </EditButton>
-                      </Link>
-                    </Tooltip>
+                <Actions>
+                  {accountDetails.username === post.username && (
+                    <>
+                      <Tooltip title="Edit Post">
+                        <Link to={`/update/${post._id}`}>
+                          <EditButton>
+                            <EditIcon fontSize="small" />
+                          </EditButton>
+                        </Link>
+                      </Tooltip>
 
-                    <Tooltip title="Delete Post">
-                      <DeleteButton onClick={() => deleteBlog()}>
-                        <DeleteIcon fontSize="small" />
-                      </DeleteButton>
-                    </Tooltip>
-                  </>
-                )}
-              </Actions>
-            </Meta>
+                      <Tooltip title="Delete Post">
+                        <DeleteButton onClick={() => deleteBlog()}>
+                          <DeleteIcon fontSize="small" />
+                        </DeleteButton>
+                      </Tooltip>
+                    </>
+                  )}
+                </Actions>
+              </Meta>
 
-            <Divider />
+              <Divider />
 
-            {/* Blog Content */}
+              {/* Blog Content */}
 
-            <Description>{post.description}</Description>
-            <Comments post={post}/>
-          </Content>
-        </Article>
-      </Container>
-    </Page>
+              <Description>{post.description}</Description>
+              <Comments post={post} />
+            </Content>
+          </Article>
+        </Container>
+      </Page>
+    </>
   );
 };
 
