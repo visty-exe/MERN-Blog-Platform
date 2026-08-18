@@ -2,7 +2,7 @@ import { Box, Button, styled, TextareaAutosize } from "@mui/material";
 import React, { useState, useContext, useEffect } from "react";
 import { OnlyContext } from "../../context/Context";
 import { getAccessToken } from "../../utils/common-utils";
-import DisplayComments from "./displayComments";
+import DisplayComments from "./DisplayComments";
 
 const Container = styled(Box)`
   margin-top: 100px;
