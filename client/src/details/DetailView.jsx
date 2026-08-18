@@ -18,7 +18,7 @@ import { getAccessToken } from "../utils/common-utils";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Type } from "lucide-react";
-import Comments from "./comments/comments";
+import Comments from "./comments/Comments";
 import { ArrowBackIos } from "@mui/icons-material";
 
 const Page = styled(Box)`

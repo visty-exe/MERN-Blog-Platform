@@ -13,8 +13,10 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 
 app.use(cors({
-    origin: "http://localhost:5173",
-    credentials: true,
+    origin: ["http://localhost:5173",
+    "https://mern-blog-platform-drab.vercel.app/"],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    allowedHeaders: ["Content-Type", "Authorization"],
 }));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
