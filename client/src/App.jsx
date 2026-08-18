@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Login from "./components/accounts/login";
+import Login from "./components/accounts/Login";
 import { Box, Toolbar } from "@mui/material";
 import ContextProvider from "./context/Context";
-import Home from "./components/home/home";
+import Home from "./components/home/Home";
 import {
   BrowserRouter,
   Routes,
