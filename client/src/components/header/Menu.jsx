@@ -37,7 +37,7 @@ const Menu = ({ menu, setMenu }) => {
           <hr className="border-gray-200" />
 
           <Link
-            to="/posts"
+            to={`/myposts/${accountDetails.id}`}
             onClick={handleClose}
             className="rounded-lg px-3 py-2 transition-all duration-200 hover:bg-gray-100"
           >
