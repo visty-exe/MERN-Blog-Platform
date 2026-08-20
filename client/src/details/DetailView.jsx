@@ -22,7 +22,7 @@ import Comments from "./comments/Comments";
 import { ArrowBackIos } from "@mui/icons-material";
 
 const Page = styled(Box)`
-  background: #f8f9fa;
+
   min-height: 100vh;
   padding: 10px 20px;
 `;
@@ -232,78 +232,82 @@ const DetailView = () => {
   };
   return (
     <>
-      <Link to={"/"}>
-        <Tooltip title="Back to Home">
-          <ArrowBackIos
-            fontSize="small"
-            className="m-4 ml-10 cursor-pointer transition-transform duration-300 hover:-translate-x-2"
-          />
-        </Tooltip>
-      </Link>
-      <Page>
-        <Container>
-          <Article>
-            {/* Hero Image */}
+      <div className="bg-[#f1f3f5] min-h-screen">
+        <Link to="/">
+          <Tooltip title="Back to Home">
+            <ArrowBackIos
+              fontSize="small"
+              className="m-4 ml-10 cursor-pointer transition-transform duration-300 hover:-translate-x-2"
+            />
+          </Tooltip>
+        </Link>
+        <Page>
+          <Container>
+            <Article>
+              {/* Hero Image */}
 
-            <HeroImage src={post.picture || fallbackImage} alt={post.title} />
+              <HeroImage src={post.picture || fallbackImage} alt={post.title} />
 
-            <Content>
-              {/* Category */}
+              <Content>
+                {/* Category */}
 
-              {post.category && <Category>{post.category}</Category>}
+                {post.category && <Category>{post.category}</Category>}
 
-              {/* Title */}
+                {/* Title */}
 
-              <Title>{post.title}</Title>
+                <Title>{post.title}</Title>
 
-              {/* Author + Date */}
+                {/* Author + Date */}
 
-              <Meta>
-                <AvatarBox>{post.username?.charAt(0)?.toUpperCase()}</AvatarBox>
+                <Meta>
+                  <AvatarBox>
+                    {post.username?.charAt(0)?.toUpperCase()}
+                  </AvatarBox>
 
-                <AuthorInfo>
-                  <Author>{post.username}</Author>
+                  <AuthorInfo>
+                    <Author>{post.username}</Author>
 
-                  {post.createdAt && (
-                    <DateText>
-                      {new Date(post.createdAt).toDateString()}
-                    </DateText>
-                  )}
-                </AuthorInfo>
+                    {post.createdAt && (
+                      <DateText>
+                        {new Date(post.createdAt).toDateString()}
+                      </DateText>
+                    )}
+                  </AuthorInfo>
 
-                {/* EDIT + DELETE */}
+                  {/* EDIT + DELETE */}
 
-                <Actions>
-                  {accountDetails.username === post.username && (
-                    <>
-                      <Tooltip title="Edit Post">
-                        <Link to={`/update/${post._id}`}>
-                          <EditButton>
-                            <EditIcon fontSize="small" />
-                          </EditButton>
-                        </Link>
-                      </Tooltip>
+                  <Actions>
+                    {accountDetails.username === post.username && (
+                      <>
+                        <Tooltip title="Edit Post">
+                          <Link to={`/update/${post._id}`}>
+                            <EditButton>
+                              <EditIcon fontSize="small" />
+                            </EditButton>
+                          </Link>
+                        </Tooltip>
 
-                      <Tooltip title="Delete Post">
-                        <DeleteButton onClick={() => deleteBlog()}>
-                          <DeleteIcon fontSize="small" />
-                        </DeleteButton>
-                      </Tooltip>
-                    </>
-                  )}
-                </Actions>
-              </Meta>
+                        <Tooltip title="Delete Post">
+                          <DeleteButton onClick={() => deleteBlog()}>
+                            <DeleteIcon fontSize="small" />
+                          </DeleteButton>
+                        </Tooltip>
+                      </>
+                    )}
+                  </Actions>
+                </Meta>
 
-              <Divider />
+                <Divider />
 
-              {/* Blog Content */}
+                {/* Blog Content */}
 
-              <Description>{post.description}</Description>
-              <Comments post={post} />
-            </Content>
-          </Article>
-        </Container>
-      </Page>
+                <Description>{post.description}</Description>
+                <Comments post={post} />
+              </Content>
+            </Article>
+          </Container>
+        </Page>
+      </div>
     </>
   );
 };
