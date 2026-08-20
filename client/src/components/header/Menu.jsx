@@ -24,7 +24,7 @@ const Menu = ({ menu, setMenu }) => {
   return (
     <>
       {menu && (
-        <div className="absolute right-0 top-full mt-2 z-50 flex flex-col w-32 bg-white rounded-xl text-center p-3 gap-2 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+        <div className="max-[612px]:hidden absolute right-0 top-full mt-2 z-50 flex flex-col w-32 bg-white rounded-xl text-center p-3 gap-2 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
           
           <Link
             onClick={handleClose}

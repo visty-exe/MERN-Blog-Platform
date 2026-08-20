@@ -3,6 +3,7 @@ import { AppBar, Avatar, Box, styled, Tooltip } from "@mui/material";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo_text.png";
 import { OnlyContext } from "../../context/Context";
+
 import Menu from "./Menu";
 
 const Component = styled(AppBar)`
@@ -29,9 +30,6 @@ const ImageContainer = styled(Box)`
     display: block;
   }
 
-  @media (max-width: 612px) {
-    display: none;
-  }
 `;
 
 const Container = styled(Box)`
@@ -59,15 +57,16 @@ const Container = styled(Box)`
     color: #26a738;
     background: rgb(62 210 25 / 8%);
   }
+     @media (max-width: 612px) {
+    display: none;
+  }
 `;
 
 const ProfileContainer = styled(Box)`
   display: flex;
   align-items: center;
   margin-left: 20px;
-  @media (max-width: 612px) {
-    display: none;
-  }
+ 
 `;
 
 const ProfileAvatar = styled(Avatar)`

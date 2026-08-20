@@ -18,6 +18,7 @@ import About from "./components/about/About"
 import Contact from "./components/contact/Contact";
 import Profile from "./components/profile/Profile";
 import MyPosts from "./components/myposts/MyPosts"
+import Small from "./smallScMenu/Small";
 
 const PrivateRoute = () => {
   const token = sessionStorage.getItem("accessToken");
@@ -26,8 +27,10 @@ const PrivateRoute = () => {
   return token ? (
     <>
       <Header />
+      <Small/>
       <Toolbar />
       <Outlet />
+      
     </>
   ) : (
     <Navigate to="/login" replace />
